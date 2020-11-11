@@ -21,3 +21,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python Virtual Env
+env
+
+# IDEs
+.DS_Store
+.idea
+
+# Python compiled files
+*.pyc
+
+db.sqlite3
