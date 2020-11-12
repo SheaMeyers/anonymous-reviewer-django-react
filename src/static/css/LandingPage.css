@@ -1,0 +1,59 @@
+.LandingPage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.Header--div {
+    width: 100%;
+    display: flex;
+    margin: 20px;
+}
+
+.Business-card--header {
+    text-decoration: underline;
+    text-align: center;
+    margin: 10px;
+}
+
+.Business-card--div {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.Business-card--text {
+    text-align: inherit;
+}
+
+.Faq-text {
+    text-align: left;
+}
+
+.Faq-link {
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.Youtube-video {
+    width: 560px;
+    height: 315px;
+}
+
+@media screen and (max-width: 550px) {
+    .Header--div {
+        flex-direction: column;
+    }
+
+    .Business-card--div {
+        flex-direction: column;
+    }
+
+    .Youtube-video {
+        width: 100%;
+        height: 100%;
+    }
+}
