@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import history from "../history";
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Fuse from 'fuse.js';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
+import TextField from '@material-ui/core/TextField';
 import '../static/css/LandingPage.css';
 
 
@@ -32,21 +34,118 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
+  },
+  cardPointer: {
+    margin: '5px 20px 5px 20px',
+    width: '100%',
+    cursor: 'pointer',
+  },
+  textField: {
+    width: '100%',
   }
 });
+
+const fuseOptions = {
+  isCaseSensitive: false,
+  findAllMatches: false,
+  includeMatches: false,
+  includeScore: false,
+  useExtendedSearch: false,
+  minMatchCharLength: 1,
+  shouldSort: true,
+  threshold:0.6,
+  location: 0,
+  distance: 100,
+  keys: [
+      "name",
+  ]
+};
+
+const searchList = [{
+  "uri": "foodies-lab",
+  "name": "Foodies lab",
+  "street_name": "Korte Molenstraat",
+  "street_number": "11",
+  "city": "Den Haag",
+  "province": "Zuid Holland",
+  "country": "Netherlands",
+  "postal_code": "2513 BM",
+},
+{
+  "uri": "el-primo-mexican-restaurant",
+  "name": "El Primo Mexican Restaurant",
+  "street_name": "Soto",
+  "street_number": "3632",
+  "city": "Huntington Park",
+  "province": "California",
+  "country": "America",
+  "postal_code": "90255",
+},
+{
+  "uri": "poached-breakfast-bistro",
+  "name": "Poached Breakfast Bistro",
+  "street_name": "2nd Ave S",
+  "street_number": "259",
+  "city": "Saskatoon",
+  "province": "Saskatchewan",
+  "country": "Canada",
+  "postal_code": "S7K 1K8",
+}]
+
+interface FuseResultsInterface { 
+  uri: string; 
+  name: string; 
+  street_name: string; 
+  street_number: string; 
+  city: string; 
+  province: string; 
+  country: string; 
+  postal_code: string; 
+}
 
 const LandingPage: React.FC = () => {
 
   const classes = useStyles();
+  const [searchResults, setSearchResults] = useState<Fuse.FuseResult<FuseResultsInterface>[]>();
+  // const [searchList, setSearchList] = useState<{}[]>([]);
+  const fuse = new Fuse(searchList, fuseOptions);
+
+  // useEffect(() => {
+  //   axios.get('get-companies/')
+  //       .then(response => {
+  //           setSearchList(response.data['companies']);
+  //       }).catch(_ => console.log('error'));
+  // }, []);
 
   return (
     <div className="LandingPage">
       <div className="Header--div">
         <Card style={{'margin': 10}} className={classes.headerCard}>
           <CardContent className={classes.cardContent}>
-            <Button variant="contained" color="primary" onClick={_ => history.push('/find-company')}>
-              find a business and leave a review
-            </Button>
+          <TextField 
+              className={classes.textField} 
+              id="find-business" 
+              label="Find business" 
+              variant="outlined" 
+              onChange={event => {
+                  const results = fuse.search(event.target.value);
+                  setSearchResults(results);
+              }}
+          />
+          {
+              searchResults && searchResults.map((result: any, index: number) => {
+                  return (
+                      <Card key={result.item.uri} className={classes.cardPointer} onClick={_ => history.push(result.item.uri)}>
+                          <CardContent className={classes.cardContent}>
+                              <p>{result.item.name}</p>
+                              <span>{result.item.street_name} {result.item.street_number}</span>
+                              <span>{result.item.city} {result.item.province}</span>
+                          </CardContent>
+                      </Card>
+                  )
+              })
+          }
+          <Link>Can't find a business?  Add it and leave a review.</Link>
           </CardContent>
         </Card>
       </div>
@@ -70,14 +169,6 @@ const LandingPage: React.FC = () => {
             This way the business will get valuable feedback about how to improve and the quality of businesses
             in the consumer's area will increase.
           </p>
-        </CardContent>
-      </Card>
-      <Card className={classes.root}>
-        <CardContent className={classes.cardContent}>
-        <h2>Watch our demo video</h2>
-        <iframe className="Youtube-video" src="https://www.youtube.com/embed/HXAGpcTFVwo" title="youtube-video"
-                frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
-        </iframe>
         </CardContent>
       </Card>
       <Card className={classes.root}>
