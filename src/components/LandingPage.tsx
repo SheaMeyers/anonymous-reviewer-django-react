@@ -61,39 +61,10 @@ const fuseOptions = {
   ]
 };
 
-// const searchList = [{
-//   "uri": "foodies-lab",
-//   "name": "Foodies lab",
-//   "street_name": "Korte Molenstraat",
-//   "street_number": "11",
-//   "city": "Den Haag",
-//   "province": "Zuid Holland",
-//   "country": "Netherlands",
-//   "postal_code": "2513 BM",
-// },
-// {
-//   "uri": "el-primo-mexican-restaurant",
-//   "name": "El Primo Mexican Restaurant",
-//   "street_name": "Soto",
-//   "street_number": "3632",
-//   "city": "Huntington Park",
-//   "province": "California",
-//   "country": "America",
-//   "postal_code": "90255",
-// },
-// {
-//   "uri": "poached-breakfast-bistro",
-//   "name": "Poached Breakfast Bistro",
-//   "street_name": "2nd Ave S",
-//   "street_number": "259",
-//   "city": "Saskatoon",
-//   "province": "Saskatchewan",
-//   "country": "Canada",
-//   "postal_code": "S7K 1K8",
-// }]
-
 interface FuseResultsInterface { 
-  uri: string; 
+  id: string;
+  created_datetime: string;
+  modified_datetime: string;
   name: string; 
   street_name: string; 
   street_number: string; 
@@ -106,16 +77,14 @@ interface FuseResultsInterface {
 const LandingPage: React.FC = () => {
 
   const classes = useStyles();
-  const [searchResults, setSearchResults] = useState<Fuse.FuseResult<FuseResultsInterface>[]>();
+  const [searchResults, setSearchResults] = useState<Fuse.FuseResult<Fuse.FuseResult<FuseResultsInterface>>[]>();
   const [searchList, setSearchList] = useState<Fuse.FuseResult<FuseResultsInterface>[]>([]);
   const fuse = new Fuse(searchList, fuseOptions);
 
   useEffect(() => {
     axios.get('http://localhost:8000/backend/get-companies/')
-        .then(response => {
-            console.log(response.data['companies']);
-            setSearchList(response.data['companies']);
-        }).catch(error => console.log('error' + error));
+        .then(response => setSearchList(response.data['companies']))
+        .catch(error => console.log('error' + error));
   }, []);
 
   return (
@@ -130,14 +99,13 @@ const LandingPage: React.FC = () => {
               variant="outlined" 
               onChange={event => {
                   const results = fuse.search(event.target.value);
-                  console.log(results);
-                  // setSearchResults(results);
+                  setSearchResults(results);
               }}
           />
           {
               searchResults && searchResults.map((result: any, index: number) => {
                   return (
-                      <Card key={result.item.uri} className={classes.cardPointer} onClick={_ => history.push(result.item.uri)}>
+                      <Card key={result.item.uri} className={classes.cardPointer} onClick={_ => history.push(result.item.id)}>
                           <CardContent className={classes.cardContent}>
                               <p>{result.item.name}</p>
                               <span>{result.item.street_name} {result.item.street_number}</span>
