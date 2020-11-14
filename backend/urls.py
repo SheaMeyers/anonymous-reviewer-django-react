@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import include
 from django.urls import path, re_path
 
 from .views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Have all backend urls nested under backend
+    path("backend/", include("backend.backend_urls")),
     # Pass any path that doesn't explicity match a 
     #   django endpoint to react router to match
     re_path(r'^.*', index),
