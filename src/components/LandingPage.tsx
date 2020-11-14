@@ -61,36 +61,36 @@ const fuseOptions = {
   ]
 };
 
-const searchList = [{
-  "uri": "foodies-lab",
-  "name": "Foodies lab",
-  "street_name": "Korte Molenstraat",
-  "street_number": "11",
-  "city": "Den Haag",
-  "province": "Zuid Holland",
-  "country": "Netherlands",
-  "postal_code": "2513 BM",
-},
-{
-  "uri": "el-primo-mexican-restaurant",
-  "name": "El Primo Mexican Restaurant",
-  "street_name": "Soto",
-  "street_number": "3632",
-  "city": "Huntington Park",
-  "province": "California",
-  "country": "America",
-  "postal_code": "90255",
-},
-{
-  "uri": "poached-breakfast-bistro",
-  "name": "Poached Breakfast Bistro",
-  "street_name": "2nd Ave S",
-  "street_number": "259",
-  "city": "Saskatoon",
-  "province": "Saskatchewan",
-  "country": "Canada",
-  "postal_code": "S7K 1K8",
-}]
+// const searchList = [{
+//   "uri": "foodies-lab",
+//   "name": "Foodies lab",
+//   "street_name": "Korte Molenstraat",
+//   "street_number": "11",
+//   "city": "Den Haag",
+//   "province": "Zuid Holland",
+//   "country": "Netherlands",
+//   "postal_code": "2513 BM",
+// },
+// {
+//   "uri": "el-primo-mexican-restaurant",
+//   "name": "El Primo Mexican Restaurant",
+//   "street_name": "Soto",
+//   "street_number": "3632",
+//   "city": "Huntington Park",
+//   "province": "California",
+//   "country": "America",
+//   "postal_code": "90255",
+// },
+// {
+//   "uri": "poached-breakfast-bistro",
+//   "name": "Poached Breakfast Bistro",
+//   "street_name": "2nd Ave S",
+//   "street_number": "259",
+//   "city": "Saskatoon",
+//   "province": "Saskatchewan",
+//   "country": "Canada",
+//   "postal_code": "S7K 1K8",
+// }]
 
 interface FuseResultsInterface { 
   uri: string; 
@@ -107,15 +107,16 @@ const LandingPage: React.FC = () => {
 
   const classes = useStyles();
   const [searchResults, setSearchResults] = useState<Fuse.FuseResult<FuseResultsInterface>[]>();
-  // const [searchList, setSearchList] = useState<{}[]>([]);
+  const [searchList, setSearchList] = useState<Fuse.FuseResult<FuseResultsInterface>[]>([]);
   const fuse = new Fuse(searchList, fuseOptions);
 
-  // useEffect(() => {
-  //   axios.get('get-companies/')
-  //       .then(response => {
-  //           setSearchList(response.data['companies']);
-  //       }).catch(_ => console.log('error'));
-  // }, []);
+  useEffect(() => {
+    axios.get('http://localhost:8000/backend/get-companies/')
+        .then(response => {
+            console.log(response.data['companies']);
+            setSearchList(response.data['companies']);
+        }).catch(error => console.log('error' + error));
+  }, []);
 
   return (
     <div className="LandingPage">
@@ -129,7 +130,8 @@ const LandingPage: React.FC = () => {
               variant="outlined" 
               onChange={event => {
                   const results = fuse.search(event.target.value);
-                  setSearchResults(results);
+                  console.log(results);
+                  // setSearchResults(results);
               }}
           />
           {
