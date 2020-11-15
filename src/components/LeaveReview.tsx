@@ -95,31 +95,33 @@ const LeaveReview: React.FC<CompanyRouteComponentProps> = (props) => {
 
     return (
         <div className='Leave-review'>
-            <CreateReview company={props.location.state} />
-            <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                    <div className="Rating-selector">
-                        <p>Display Reviews with Rating: </p>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Rating</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={rating}
-                                onChange={handleRatingChange}
-                                label="Rating"
-                            >
-                                <MenuItem value={0}><em>All</em></MenuItem>
-                                <MenuItem value={1}>One</MenuItem>
-                                <MenuItem value={2}>Two</MenuItem>
-                                <MenuItem value={3}>Three</MenuItem>
-                                <MenuItem value={4}>Four</MenuItem>
-                                <MenuItem value={5}>Five</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </div>
-                </CardContent>
-            </Card>
+            <div className='Leave-review--header-div'>
+                <CreateReview company={props.location.state} />
+                <Card className={classes.card}>
+                    <CardContent className={classes.cardContent}>
+                        <div className="Rating-selector">
+                            <p>Display Reviews with Rating: </p>
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <InputLabel id="demo-simple-select-outlined-label">Rating</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={rating}
+                                    onChange={handleRatingChange}
+                                    label="Rating"
+                                >
+                                    <MenuItem value={0}><em>All</em></MenuItem>
+                                    <MenuItem value={1}>One</MenuItem>
+                                    <MenuItem value={2}>Two</MenuItem>
+                                    <MenuItem value={3}>Three</MenuItem>
+                                    <MenuItem value={4}>Four</MenuItem>
+                                    <MenuItem value={5}>Five</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
             <ReviewList id={props.location.state.id} rating={rating} />
         </div>
     );

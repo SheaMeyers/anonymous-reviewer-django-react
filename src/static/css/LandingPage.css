@@ -38,10 +38,6 @@
     text-decoration: none !important;
 }
 
-.Youtube-video {
-    width: 560px;
-    height: 315px;
-}
 
 @media screen and (max-width: 550px) {
     .Header--div {
@@ -50,10 +46,5 @@
 
     .Business-card--div {
         flex-direction: column;
-    }
-
-    .Youtube-video {
-        width: 100%;
-        height: 100%;
     }
 }
