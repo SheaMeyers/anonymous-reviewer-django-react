@@ -1,0 +1,29 @@
+.Review-List {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Review-List--top-portion {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.Review-List--Title-Header {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 550px) {
+    .Review-List--top-portion {
+        flex-direction: column;
+    }
+
+    .Review-List--Star-Portion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
