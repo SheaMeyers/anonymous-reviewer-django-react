@@ -137,3 +137,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'build', 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 PAGE_CACHE = 60 * 60  # cache for 1 hour
+
+PAGINATION_SIZE = 20  # items
