@@ -105,7 +105,7 @@ const LandingPage: React.FC = () => {
           {
               searchResults && searchResults.map((result: any, index: number) => {
                   return (
-                      <Card key={result.item.uri} className={classes.cardPointer} onClick={_ => history.push(result.item.id)}>
+                      <Card key={result.item.uri} className={classes.cardPointer} onClick={_ => history.push('/leave-review', {...result.item})}>
                           <CardContent className={classes.cardContent}>
                               <p>{result.item.name}</p>
                               <span>{result.item.street_name} {result.item.street_number}</span>

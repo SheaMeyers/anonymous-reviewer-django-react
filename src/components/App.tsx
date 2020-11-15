@@ -4,7 +4,7 @@ import history from "../history";
 // import FindCompany from './FindCompany';
 // import FrequentlyAskedQuestions from './FrequentlyAskedQuestions';
 import LandingPage from './LandingPage';
-// import LeaveReview from './LeaveReview';
+import LeaveReview from './LeaveReview';
 // import Privacy from './Privacy';
 
 
@@ -13,6 +13,7 @@ const App: React.FC = () => {
         <Router history={history}>
             <Switch>
                 <Route path="/" exact component={LandingPage} />
+                <Route path="/leave-review" exact component={LeaveReview} />
                 {/* <Route path="/find-company" exact component={FindCompany} />
                 <Route path="/faq" exact component={FrequentlyAskedQuestions} />
                 <Route path="/privacy" exact component={Privacy} />
