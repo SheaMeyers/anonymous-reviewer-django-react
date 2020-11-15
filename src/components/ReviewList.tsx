@@ -65,8 +65,6 @@ const ReviewList = (props: ReviewListProps) => {
               'Content-Type': 'application/json'
             }
           }).then(result => {
-                console.log('result.data');
-              console.log(result.data);
             setListItems(listItems.concat(result.data['reviews']));
             setPage(page+1);
             setIsFetching(false);
