@@ -6,8 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import StarIcon from '@material-ui/icons/Star';
+import Select from '@material-ui/core/Select';
 import ReviewList from './ReviewList';
 import '../static/css/LeaveReview.css';
 
@@ -17,10 +21,21 @@ const useStyles = makeStyles({
         margin: 20,
         overflow: 'visible',
     },
+    card: {
+        margin: 20,
+        overflow: 'visible',
+        ['@media (max-width: 550px)']: { // eslint-disable-line no-useless-computed-key
+            minWidth: '90%'
+        }
+    },
     cardContent: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    formControl: {
+        margin: 20,
+        minWidth: 120,
     },
     textField: {
         width: '100%',
@@ -88,6 +103,10 @@ const LeaveReview: React.FC<CompanyRouteComponentProps> = (props) => {
 
     // Localhost
     const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
+
+    const handleRatingChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setRating(event.target.value as number);
+    };
 
     //   const recaptchaOnChange = (value: any) => {
     //     axios.post(`node/create-review/${companyId}`, {
@@ -166,7 +185,31 @@ const LeaveReview: React.FC<CompanyRouteComponentProps> = (props) => {
                     </div>
                 </CardContent>
             </Card>
-            <ReviewList id={props.location.state.id} rating={0} />
+            <Card className={classes.card}>
+                <CardContent className={classes.cardContent}>
+                    <div className="Rating-selector">
+                        <p>Display Reviews with Rating: </p>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Rating</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                value={rating}
+                                onChange={handleRatingChange}
+                                label="Rating"
+                            >
+                                <MenuItem value={0}><em>All</em></MenuItem>
+                                <MenuItem value={1}>One</MenuItem>
+                                <MenuItem value={2}>Two</MenuItem>
+                                <MenuItem value={3}>Three</MenuItem>
+                                <MenuItem value={4}>Four</MenuItem>
+                                <MenuItem value={5}>Five</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                </CardContent>
+            </Card>
+            <ReviewList id={props.location.state.id} rating={rating} />
         </div>
     );
 }
