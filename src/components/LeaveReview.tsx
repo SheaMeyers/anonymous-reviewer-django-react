@@ -1,6 +1,5 @@
 import React, { useState, useEffect, RefObject } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
 import { RouteComponentProps } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -73,12 +72,6 @@ interface CompanyRouteComponentProps extends RouteComponentProps {
 
 const LeaveReview: React.FC<CompanyRouteComponentProps> = (props) => {
 
-
-    console.log(props);
-    console.log(props.location);
-    console.log(props.location.state);
-    console.log(props.location.state.name);
-
   const classes = useStyles();
   const [rating, setRating] = useState<number>(0);
   const [review, setReview] = useState<string>();
@@ -126,6 +119,9 @@ const LeaveReview: React.FC<CompanyRouteComponentProps> = (props) => {
                     // onChange={recaptchaOnChange}
                   />
                   <h2 style={{'textAlign': 'center'}}>{props.location.state.name}</h2>
+                  <span>{props.location.state.street_name} {props.location.state.street_number}</span>
+                  <span>{props.location.state.city} {props.location.state.province}</span>
+                  <br/>
                   <div>
                     <StarIcon 
                       className={rating >= 1 ? classes.star : classes.starOutline} 
