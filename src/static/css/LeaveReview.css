@@ -10,6 +10,11 @@
     align-items: end;
 }
 
+.roboto-font {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto';
+}
 
 @media screen and (max-width: 550px) {
     .Leave-review--header-div {
