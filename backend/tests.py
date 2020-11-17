@@ -25,6 +25,12 @@ class TestGetCompanies(APITestCase):
         self.assertEqual(data['companies'][0]['province'], '')
         self.assertEqual(data['companies'][0]['country'], '')
         self.assertEqual(data['companies'][0]['postal_code'], '')
+        self.assertEqual(data['companies'][0]['rating_stats']['average_rating'], 0.0)
+        self.assertEqual(data['companies'][0]['rating_stats']['number_five_star_ratings'], 0.0)
+        self.assertEqual(data['companies'][0]['rating_stats']['number_four_star_ratings'], 0.0)
+        self.assertEqual(data['companies'][0]['rating_stats']['number_three_star_ratings'], 0.0)
+        self.assertEqual(data['companies'][0]['rating_stats']['number_two_star_ratings'], 0.0)
+        self.assertEqual(data['companies'][0]['rating_stats']['number_one_star_ratings'], 0.0)
 
 
 class TestGetCompanyReviewsView(APITestCase):

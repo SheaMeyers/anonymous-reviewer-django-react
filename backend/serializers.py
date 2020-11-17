@@ -1,8 +1,16 @@
 from rest_framework import serializers
-from backend.models import Company, Review
+from backend.models import Company, Review, RatingStats
+
+
+class RatingStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RatingStats
+        fields = '__all__'
 
 
 class CompanySerializer(serializers.ModelSerializer):
+    rating_stats = RatingStatsSerializer(read_only=True)
+
     class Meta:
         model = Company
         fields = '__all__'

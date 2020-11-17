@@ -22,6 +22,16 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class RatingStats(BaseModel):
+    
+    average_rating = models.FloatField(default=0)
+    number_five_star_ratings = models.IntegerField(default=0)
+    number_four_star_ratings = models.IntegerField(default=0)
+    number_three_star_ratings = models.IntegerField(default=0)
+    number_two_star_ratings = models.IntegerField(default=0)
+    number_one_star_ratings = models.IntegerField(default=0)
+
+
 class Company(BaseModel):
 
     name = models.CharField(
@@ -29,6 +39,11 @@ class Company(BaseModel):
         max_length=150,
         help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
         validators=[UnicodeUsernameValidator()],
+    )
+
+    rating_stats = models.OneToOneField(
+        RatingStats,
+        on_delete=models.CASCADE
     )
 
     street_name = models.CharField(max_length=150, blank=True)
@@ -43,6 +58,14 @@ class Company(BaseModel):
 
     def __repr__(self):
         return self.name
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+
+        self.rating_stats = RatingStats.objects.create()
+
+        return super().save(force_insert=force_insert, force_update=force_update,
+                            using=using, update_fields=update_fields)
 
 
 class Review(BaseModel):
