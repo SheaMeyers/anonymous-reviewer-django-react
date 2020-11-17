@@ -1,9 +1,11 @@
 from django.conf import settings
+from django.test import TestCase
 
 from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse
 
-from backend.models import Company, Review
+from .models import Company, Review
+from .utils import calculate_star_ratings
 
 
 class TestGetCompanies(APITestCase):
@@ -75,3 +77,23 @@ class TestGetCompanyReviewsView(APITestCase):
         response = self.client.get(f"{endpoint_path}?page=3")
         third_page_data = response.json()['reviews']
         self.assertEqual(third_page_data, [])
+
+
+class TestCalculateStarRatings(TestCase):
+
+    def test_calculate_star_rating(self):
+        company = Company.objects.create(name='Test company')
+        Review.objects.create(company=company, rating=5, message='Five star review')
+        Review.objects.create(company=company, rating=4, message='Four star review')
+
+        calculate_star_ratings()
+
+        company.refresh_from_db()
+        company.rating_stats.refresh_from_db()
+
+        self.assertEqual(company.rating_stats.average_rating, 4.5)
+        self.assertEqual(company.rating_stats.number_five_star_ratings, 1)
+        self.assertEqual(company.rating_stats.number_four_star_ratings, 1)
+        self.assertEqual(company.rating_stats.number_three_star_ratings, 0)
+        self.assertEqual(company.rating_stats.number_two_star_ratings, 0)
+        self.assertEqual(company.rating_stats.number_one_star_ratings, 0)
