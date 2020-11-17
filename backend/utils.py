@@ -2,8 +2,10 @@ from .models import Company
 
 
 def calculate_star_ratings(additional_filters=None):
+    if not isinstance(additional_filters, dict):
+        additional_filters = {}
 
-    companies = Company.objects.all()
+    companies = Company.objects.filter(**additional_filters)
 
     for company in companies:
 
