@@ -139,3 +139,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 PAGE_CACHE = 60 * 60  # cache for 1 hour
 
 PAGINATION_SIZE = 20  # items
+
+
+CELERY_SCHEMA = os.environ.get('CELERY_SCHEMA', 'redis')
+CELERY_URL = os.environ.get('CELERY_URL', 'localhost')
+CELERY_POST = os.environ.get('CELERY_POST', '6379')
+CELERY_DB = os.environ.get('CELERY_DB', '0')
