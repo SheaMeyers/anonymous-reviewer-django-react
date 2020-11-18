@@ -92,7 +92,8 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
     const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
 
     //   const recaptchaOnChange = (value: any) => {
-    //     axios.post(`node/create-review/${companyId}`, {
+    //     axios.post(http://localhost:8000/backend/create-review/, {
+    //       company_id: props.company.id,
     //       rating: rating,
     //       message: review
     //     })

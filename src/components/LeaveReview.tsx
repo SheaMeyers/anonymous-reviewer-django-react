@@ -70,6 +70,15 @@ const useStyles = makeStyles({
 });
 
 
+interface RatingStats {
+    average_rating: string;
+    number_five_star_ratings: string;
+    number_four_star_ratings: string;
+    number_three_star_ratings: string;
+    number_two_star_ratings: string;
+    number_one_star_ratings: string;
+}
+
 interface CompanyState {
     id: string;
     created_datetime: string;
@@ -81,6 +90,7 @@ interface CompanyState {
     province: string;
     country: string;
     postal_code: string;
+    rating_stats: RatingStats;
 }
 
 
@@ -134,12 +144,12 @@ const LeaveReview: React.FC<CompanyRouteComponentProps> = (props) => {
                     </Card>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContentLeft}>
-                            <p>Average Rating:&nbsp;&nbsp;<b>3.87</b></p>
-                            <span className="roboto-font">5 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>531</b></span>
-                            <span className="roboto-font">4 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>211</b></span>
-                            <span className="roboto-font">3 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>89</b></span>
-                            <span className="roboto-font">2 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>2</b></span>
-                            <span className="roboto-font">1 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>0</b></span>
+                            <p>Average Rating:&nbsp;&nbsp;<b>{parseFloat(props.location.state.rating_stats.average_rating).toFixed(2)}</b></p>
+                            <span className="roboto-font">5 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>{props.location.state.rating_stats.number_five_star_ratings}</b></span>
+                            <span className="roboto-font">4 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>{props.location.state.rating_stats.number_four_star_ratings}</b></span>
+                            <span className="roboto-font">3 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>{props.location.state.rating_stats.number_three_star_ratings}</b></span>
+                            <span className="roboto-font">2 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>{props.location.state.rating_stats.number_two_star_ratings}</b></span>
+                            <span className="roboto-font">1 <StarIcon className={classes.miniStar} />:&nbsp;&nbsp;<b>{props.location.state.rating_stats.number_one_star_ratings}</b></span>
                         </CardContent>
                     </Card>
                 </div>
