@@ -2,9 +2,9 @@ Django==2.2.17
 
 djangorestframework==3.12.2
 
-django-cors-headers==3.1.0
+django-cors-headers==3.5.0
 
-django-admin-rangefilter==0.4.0
+django-admin-rangefilter==0.6.3
 
 django-heroku==0.3.1
 
@@ -12,14 +12,14 @@ psycopg2==2.8.6
 
 gunicorn==20.0.4
 
-python-dateutil==2.8.0
+python-dateutil==2.8.1
 
-celery==4.4.1
-redis==3.3.10
+celery==5.0.2
+redis==3.5.3
 django-redis==4.12.1
 
-mock==3.0.5
+mock==4.0.2
 
-kombu==4.6.8
+kombu==5.0.2
 
 whitenoise==5.2.0
