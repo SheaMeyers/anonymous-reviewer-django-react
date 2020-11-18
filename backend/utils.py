@@ -26,5 +26,7 @@ def calculate_star_ratings(additional_filters=None):
 
             total_star_review_value += review.rating
 
-        company.rating_stats.average_rating = total_star_review_value/reviews.count()
+        if reviews:
+            company.rating_stats.average_rating = total_star_review_value/reviews.count()
+
         company.rating_stats.save()

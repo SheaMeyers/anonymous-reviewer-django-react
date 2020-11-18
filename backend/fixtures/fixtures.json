@@ -1,5 +1,53 @@
 [
   {
+    "model": "backend.RatingStats",
+    "pk": "2b5222a9-fce1-4fec-af7c-67df9e37daa2",
+    "fields": {
+      "created_datetime": "2019-10-22T12:00:00+0000",
+      "modified_datetime": "2019-10-22T12:00:00+0000"
+    }
+  },
+  {
+    "model": "backend.RatingStats",
+    "pk": "8fa00c0e-9f42-427e-b891-8a522702021a",
+    "fields": {
+      "created_datetime": "2019-10-22T12:00:00+0000",
+      "modified_datetime": "2019-10-22T12:00:00+0000"
+    }
+  },
+  {
+    "model": "backend.RatingStats",
+    "pk": "9ffe7f6e-f6e5-417d-be8d-52d211818e58",
+    "fields": {
+      "created_datetime": "2019-10-22T12:00:00+0000",
+      "modified_datetime": "2019-10-22T12:00:00+0000"
+    }
+  },
+  {
+    "model": "backend.RatingStats",
+    "pk": "136d8d14-5a8f-483b-a482-67212027c771",
+    "fields": {
+      "created_datetime": "2019-10-22T12:00:00+0000",
+      "modified_datetime": "2019-10-22T12:00:00+0000"
+    }
+  },
+  {
+    "model": "backend.RatingStats",
+    "pk": "eaa022d1-fdea-4eb2-8e06-6e2b7ffa6cfd",
+    "fields": {
+      "created_datetime": "2019-10-22T12:00:00+0000",
+      "modified_datetime": "2019-10-22T12:00:00+0000"
+    }
+  },
+  {
+    "model": "backend.RatingStats",
+    "pk": "9af98573-0583-446c-be3e-6df4dd4df893",
+    "fields": {
+      "created_datetime": "2019-10-22T12:00:00+0000",
+      "modified_datetime": "2019-10-22T12:00:00+0000"
+    }
+  },
+  {
     "model": "backend.Company",
     "pk": "540498a5-313d-4308-ba3d-187f4aa73ecb",
     "fields": {
@@ -11,7 +59,8 @@
       "city": "Chicago",
       "province": "Illinois",
       "country": "USA",
-      "postal_code": "60624"
+      "postal_code": "60624",
+      "rating_stats_id": "2b5222a9-fce1-4fec-af7c-67df9e37daa2"
     }
   },
   {
@@ -26,7 +75,8 @@
       "city": "Cincinnati",
       "province": "Ohio",
       "country": "USA",
-      "postal_code": "45219"
+      "postal_code": "45219",
+      "rating_stats_id": "8fa00c0e-9f42-427e-b891-8a522702021a"
     }
   },
   {
@@ -41,7 +91,8 @@
       "city": "Miami",
       "province": "Florida",
       "country": "USA",
-      "postal_code": "33403"
+      "postal_code": "33403",
+      "rating_stats_id": "9ffe7f6e-f6e5-417d-be8d-52d211818e58"
     }
   },
   {
@@ -56,7 +107,8 @@
       "city": "Philadelphia",
       "province": "Pennsylvania",
       "country": "USA",
-      "postal_code": "19143"
+      "postal_code": "19143",
+      "rating_stats_id": "136d8d14-5a8f-483b-a482-67212027c771"
     }
   },
   {
@@ -71,7 +123,8 @@
       "city": "Los Angeles",
       "province": "California",
       "country": "USA",
-      "postal_code": "90003"
+      "postal_code": "90003",
+      "rating_stats_id": "eaa022d1-fdea-4eb2-8e06-6e2b7ffa6cfd"
     }
   },
   {
@@ -80,7 +133,8 @@
     "fields": {
       "created_datetime": "2020-10-09T12:00:00+0000",
       "modified_datetime": "2020-10-09T12:00:00+0000",
-      "name": "No Location Company"
+      "name": "No Location Company",
+      "rating_stats_id": "9af98573-0583-446c-be3e-6df4dd4df893"
     }
   },
   {
