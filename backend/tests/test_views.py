@@ -1,3 +1,5 @@
+from mock import patch
+
 from django.conf import settings
 
 from rest_framework.test import APITestCase
@@ -75,3 +77,30 @@ class TestGetCompanyReviewsView(APITestCase):
         response = self.client.get(f"{endpoint_path}?page=3")
         third_page_data = response.json()['reviews']
         self.assertEqual(third_page_data, [])
+
+
+class TestCreateReview(APITestCase):
+
+    @patch('backend.tasks.create_review.delay')
+    def test_create_reviews_view_calls_task(self, task_mock):
+        test_data = {
+            'company_id': '00000000-0000-0000-0000-000000000000',
+            'rating': 5,
+            'message': 'Test message'
+        }
+
+        response = self.client.post(reverse('create-review'), data=test_data, format='json')
+
+        self.assertEqual(response.status_code, 200)
+        task_mock.assert_called_once_with('00000000-0000-0000-0000-000000000000', 5, 'Test message')
+
+    @patch('backend.tasks.create_review.delay')
+    def test_bad_request_gives_200(self, task_mock):
+        test_data = {
+            'bad': 'data'
+        }
+
+        response = self.client.post(reverse('create-review'), data=test_data, format='json')
+
+        self.assertEqual(response.status_code, 200)
+        task_mock.assert_not_called()

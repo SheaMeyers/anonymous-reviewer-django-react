@@ -70,8 +70,8 @@ class Company(BaseModel):
 
 class Review(BaseModel):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='reviews')
-    rating = models.IntegerField(null=True, validators=[MinValueValidator(1), MaxValueValidator(5)])
-    message = models.CharField(max_length=4000)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    message = models.CharField(max_length=4000, blank=True)
 
     class Meta:
         ordering = ['-created_datetime']

@@ -26,3 +26,9 @@ class ReviewSerializer(serializers.ModelSerializer):
         data = super().to_representation(obj)
         data['company'] = str(data['company'])
         return data
+
+
+class CreateReviewSerializers(serializers.Serializer):
+    company_id = serializers.CharField()
+    rating = serializers.IntegerField(required=False)
+    message = serializers.CharField(required=False)

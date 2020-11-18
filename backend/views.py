@@ -10,7 +10,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from backend.models import Company, Review
-from backend.serializers import CompanySerializer, ReviewSerializer
+from backend.serializers import CompanySerializer, ReviewSerializer, CreateReviewSerializers
+from backend.tasks import create_review
 
 # Serve Single Page Application
 index = never_cache(TemplateView.as_view(template_name='index.html'))
@@ -48,3 +49,20 @@ class GetCompanyReviewsView(APIView):
         reviews_data = ReviewSerializer(reviews, many=True).data
 
         return Response(status=status.HTTP_200_OK, data={'reviews': reviews_data})
+
+
+class CreateReviewsView(APIView):
+
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request: Request) -> Response:
+        serializer = CreateReviewSerializers(data=request.data)
+        if not serializer.is_valid():
+            # In case of error just return 200
+            return Response(status=status.HTTP_200_OK)
+
+        create_review.delay(serializer.validated_data['company_id'],
+                            serializer.validated_data['rating'],
+                            serializer.validated_data['message'])
+
+        return Response(status=status.HTTP_200_OK)
