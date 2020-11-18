@@ -46,9 +46,9 @@ class Company(BaseModel):
         on_delete=models.CASCADE
     )
 
-    street_name = models.CharField(max_length=150, blank=True)
-    street_number = models.CharField(max_length=150, blank=True)
-    city = models.CharField(max_length=150, blank=True)
+    street_name = models.CharField(max_length=150)
+    street_number = models.CharField(max_length=150)
+    city = models.CharField(max_length=150)
     province = models.CharField(max_length=150, blank=True)
     country = models.CharField(max_length=150, blank=True)
     postal_code = models.CharField(max_length=150, blank=True)

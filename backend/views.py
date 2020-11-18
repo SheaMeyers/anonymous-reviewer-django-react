@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from backend.models import Company, Review
-from backend.serializers import CompanySerializer, ReviewSerializer, CreateReviewSerializers
+from backend.serializers import CompanySerializer, ReviewSerializer, CreateReviewSerializers, CreateCompanySerializers
 from backend.tasks import create_review
 
 # Serve Single Page Application
@@ -61,8 +61,33 @@ class CreateReviewsView(APIView):
             # In case of error just return 200
             return Response(status=status.HTTP_200_OK)
 
-        create_review.delay(serializer.validated_data['company_id'],
-                            serializer.validated_data['rating'],
-                            serializer.validated_data['message'])
+        if serializer.validated_data['company_id']:
+            create_review.delay(serializer.validated_data['company_id'],
+                                serializer.validated_data['rating'],
+                                serializer.validated_data['message'])
+
+        return Response(status=status.HTTP_200_OK)
+
+
+class CreateCompanyView(APIView):
+
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request: Request) -> Response:
+        company_serializer = CreateCompanySerializers(data=request.data)
+        if not company_serializer.is_valid():
+            # In case of error just return 200
+            return Response(status=status.HTTP_200_OK)
+
+        company = Company.objects.create(**company_serializer.validated_data)
+
+        review_serializer = CreateReviewSerializers(data=request.data)
+        if not review_serializer.is_valid():
+            # In case of error just return 200
+            return Response(status=status.HTTP_200_OK)
+
+        create_review.delay(str(company.id),
+                            review_serializer.validated_data['rating'],
+                            review_serializer.validated_data['message'])
 
         return Response(status=status.HTTP_200_OK)

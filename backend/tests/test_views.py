@@ -104,3 +104,36 @@ class TestCreateReview(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         task_mock.assert_not_called()
+
+
+class TestCreateCompany(APITestCase):
+
+    @patch('backend.tasks.create_review.delay')
+    def test_create_reviews_view_calls_task(self, task_mock):
+        test_data = {
+            'name': 'Test Company',
+            'street_name': 'Main St.',
+            'street_number': 123,
+            'city': 'Chicago',
+            'rating': 5,
+            'message': 'Test message'
+        }
+
+        response = self.client.post(reverse('create-company'), data=test_data, format='json')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(Company.objects.filter(name='Test Company', street_name='Main St.',
+                                               street_number=123, city='Chicago').exists())
+        company = Company.objects.get(name='Test Company')
+        task_mock.assert_called_once_with(str(company.id), 5, 'Test message')
+
+    @patch('backend.tasks.create_review.delay')
+    def test_bad_request_gives_200(self, task_mock):
+        test_data = {
+            'bad': 'data'
+        }
+
+        response = self.client.post(reverse('create-company'), data=test_data, format='json')
+
+        self.assertEqual(response.status_code, 200)
+        task_mock.assert_not_called()

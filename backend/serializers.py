@@ -29,6 +29,16 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class CreateReviewSerializers(serializers.Serializer):
-    company_id = serializers.CharField()
-    rating = serializers.IntegerField(required=False)
+    company_id = serializers.CharField(required=False)
+    rating = serializers.IntegerField()
     message = serializers.CharField(required=False)
+
+
+class CreateCompanySerializers(serializers.Serializer):
+    name = serializers.CharField()
+    street_name = serializers.CharField()
+    street_number = serializers.CharField()
+    city = serializers.CharField()
+    province = serializers.CharField(required=False)
+    country = serializers.CharField(required=False)
+    postal_code = serializers.CharField(required=False)
