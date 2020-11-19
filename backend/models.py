@@ -53,6 +53,9 @@ class Company(BaseModel):
     country = models.CharField(max_length=150, blank=True)
     postal_code = models.CharField(max_length=150, blank=True)
 
+    is_flagged = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 
@@ -72,6 +75,9 @@ class Review(BaseModel):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='reviews')
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     message = models.CharField(max_length=4000, blank=True)
+
+    is_flagged = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_datetime']
