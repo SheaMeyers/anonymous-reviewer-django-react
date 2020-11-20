@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView
 from django.views.decorators.cache import never_cache, cache_page
 from django.utils.decorators import method_decorator
@@ -35,7 +36,7 @@ class GetCompanyReviewsView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request: Request, id=None) -> Response:
-        company_reviews = Review.objects.filter(company_id=id)
+        company_reviews = Review.objects.filter(company_id=id, is_flagged=False)
 
         paginator = Paginator(company_reviews, settings.PAGINATION_SIZE)
         page = request.GET.get('page') or 1  # Default to showing first page
@@ -91,3 +92,27 @@ class CreateCompanyView(APIView):
                             review_serializer.validated_data['message'])
 
         return Response(status=status.HTTP_200_OK)
+
+
+class FlagView(APIView):
+
+    model = None
+
+    def get(self, request: Request, id=None) -> Response:
+
+        try:
+            instance = self.model.objects.get(id=id, is_verified=False)
+            instance.is_flagged = True
+            instance.save()
+        except ObjectDoesNotExist:
+            pass
+
+        return Response(status=status.HTTP_200_OK)
+
+
+class FlagCompany(FlagView):
+    model = Company
+
+
+class FlagReview(FlagView):
+    model = Review

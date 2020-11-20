@@ -55,6 +55,23 @@ class TestGetCompanyReviewsView(APITestCase):
         for review in response_data['reviews']:
             self.assertEqual(review['company'], str(company.id))
 
+    def test_get_reviews_data_with_flagged_review(self):
+        company = Company.objects.create(name='Test company')
+        other_company = Company.objects.create(name='Other company')
+        endpoint_path = reverse('get-company-reviews', kwargs={'id': company.id})
+
+        not_flagged_review = Review.objects.create(company=company, rating=1, message='first review')
+        Review.objects.create(company=company, rating=5, message='second review', is_flagged=True)
+        Review.objects.create(company=other_company, rating=1, message='first other review')
+        Review.objects.create(company=other_company, rating=5, message='second other review')
+
+        response = self.client.get(endpoint_path)
+
+        self.assertEqual(response.status_code, 200)
+        response_data = response.json()
+        self.assertEqual(len(response_data['reviews']), 1)
+        self.assertEqual(response_data['reviews'][0]['id'], str(not_flagged_review.id))
+
     def test_pagination(self):
         company = Company.objects.create(name='Test company')
         endpoint_path = reverse('get-company-reviews', kwargs={'id': company.id})
@@ -137,3 +154,47 @@ class TestCreateCompany(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         task_mock.assert_not_called()
+
+
+class TestFlagCompany(APITestCase):
+
+    def test_flag_company(self):
+        company = Company.objects.create(name='Test Company')
+
+        response = self.client.get(reverse('flag-company', kwargs={'id': company.id}))
+
+        self.assertEqual(response.status_code, 200)
+        company.refresh_from_db()
+        self.assertTrue(company.is_flagged)
+
+    def test_flag_verified_company(self):
+        company = Company.objects.create(name='Test Company', is_verified=True)
+
+        response = self.client.get(reverse('flag-company', kwargs={'id': company.id}))
+
+        self.assertEqual(response.status_code, 200)
+        company.refresh_from_db()
+        self.assertFalse(company.is_flagged)
+
+
+class TestFlagReview(APITestCase):
+
+    def test_flag_review(self):
+        company = Company.objects.create(name='Test Company')
+        review = Review.objects.create(company=company, rating=1, message='first review')
+
+        response = self.client.get(reverse('flag-review', kwargs={'id': review.id}))
+
+        self.assertEqual(response.status_code, 200)
+        review.refresh_from_db()
+        self.assertTrue(review.is_flagged)
+
+    def test_flag_verified_review(self):
+        company = Company.objects.create(name='Test Company')
+        review = Review.objects.create(company=company, rating=1, message='first review', is_verified=True)
+
+        response = self.client.get(reverse('flag-review', kwargs={'id': review.id}))
+
+        self.assertEqual(response.status_code, 200)
+        review.refresh_from_db()
+        self.assertFalse(review.is_flagged)

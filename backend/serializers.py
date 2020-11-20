@@ -20,7 +20,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        exclude = ('id',)
+        fields = '__all__'
 
     def to_representation(self, obj):
         data = super().to_representation(obj)
