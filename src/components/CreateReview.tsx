@@ -1,4 +1,4 @@
-import React, { useState, useEffect, RefObject } from 'react';
+import React, { useState, RefObject } from 'react';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 import { makeStyles } from '@material-ui/core/styles';
@@ -155,7 +155,7 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
                         {feedbackMessage && <p style={{ 'color': 'green' }}>{feedbackMessage}</p>}
                         <Button variant="contained" color="primary" type="submit">
                             Submit review
-                </Button>
+                        </Button>
                         <p>
                             Your review will be anonymous.
                             We do not track or save any of your information.

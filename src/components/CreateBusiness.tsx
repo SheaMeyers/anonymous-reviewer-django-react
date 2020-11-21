@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, RefObject } from 'react';
+import axios from 'axios';
+import history from "../history";
+import ReCAPTCHA from "react-google-recaptcha";
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -31,6 +34,43 @@ const useStyles = makeStyles((theme: Theme) =>
 const CreateBusiness = () => {
 
     const classes = useStyles();
+
+    const [companyName, setCompanyName] = useState<string>('');
+    const [streetName, setStreetName] = useState<string>('');
+    const [streetNumber, setStreetNumber] = useState<string>('');
+    const [city, setCity] = useState<string>('');
+    const [province, setProvince] = useState<string>('');
+    const [country, setCountry] = useState<string>('');
+    const [postalCode, setPostalCode] = useState<string>('');
+    const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+
+    const recaptchaRef: RefObject<ReCAPTCHA> = React.createRef<ReCAPTCHA>();
+
+    // localhost -> 6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN
+    // prod -> 6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb
+    // const recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY || "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
+
+    // Prod
+    // const recaptchaSiteKey = "6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb";
+
+    // Localhost
+    const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
+
+    const recaptchaOnChange = (value: any) => {
+        axios.post('http://localhost:8000/backend/create-company/', {
+            name: companyName,
+            street_name: streetName,
+            street_number: streetNumber,
+            city: city,
+            province: province,
+            country: country,
+            postal_code: postalCode
+        })
+        .then(result => {
+            history.push('/leave-review', {...result.data});
+        })
+        .catch(_ => setFeedbackMessage('Unable to create business.  Please try again later.'))
+    }
     
     return (
         <div className='Create-business'>
@@ -41,8 +81,25 @@ const CreateBusiness = () => {
                         event.preventDefault();
 
                         // @ts-ignore
+                        const elements = event.target.elements;
+                        setCompanyName(elements.companyName.value);
+                        setStreetName(elements.streetName.value);
+                        setStreetNumber(elements.streetNumber.value);
+                        setCity(elements.city.value);
+                        setProvince(elements.province.value);
+                        setCountry(elements.country.value);
+                        setPostalCode(elements.postalCode.value);
+
+                        recaptchaRef.current!.execute();
                     }}>
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            size="invisible"
+                            sitekey={recaptchaSiteKey}
+                            onChange={recaptchaOnChange}
+                        />
                         <TextField
+                            required
                             id="outlined-company-name-input"
                             label="Company Name"
                             className={classes.textField}
@@ -51,6 +108,7 @@ const CreateBusiness = () => {
                             variant="outlined"
                         />
                         <TextField
+                            required
                             id="outlined-street-name-input"
                             label="Street Name"
                             className={classes.textField}
@@ -59,6 +117,7 @@ const CreateBusiness = () => {
                             variant="outlined"
                         />
                         <TextField
+                            required
                             id="outlined-street-number-input"
                             label="Street Number"
                             className={classes.textField}
@@ -67,6 +126,7 @@ const CreateBusiness = () => {
                             variant="outlined"
                         />
                         <TextField
+                            required
                             id="outlined-city-input"
                             label="City"
                             className={classes.textField}
@@ -98,7 +158,7 @@ const CreateBusiness = () => {
                             margin="normal"
                             variant="outlined"
                         />
-                        
+                        {feedbackMessage && <p style={{ 'color': 'red' }}>{feedbackMessage}</p>}
                         <Button variant="contained" color="primary" type="submit">
                             Create Business
                         </Button>
