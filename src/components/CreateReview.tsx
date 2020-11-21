@@ -48,6 +48,19 @@ const useStyles = makeStyles({
             color: '#ffff99',
         },
     },
+    initialReportedText: {
+        color: 'red',
+        cursor: 'pointer',
+        width: '100%',
+        fontSize: 14,
+        textAlign: 'right'
+    },
+    reportedText: {
+        color: 'green',
+        width: '100%',
+        fontSize: 14,
+        textAlign: 'right'
+    }
 });
 
 
@@ -71,9 +84,12 @@ interface CompanyProps {
 
 const CreateReview: React.FC<CompanyProps> = (props) => {
 
+    const initialReportText = 'Something incorrect?  Report it by clicking here.';
+
     const classes = useStyles();
     const [rating, setRating] = useState<number>(0);
     const [review, setReview] = useState<string>();
+    const [reportText, setReportText] = useState<string>(initialReportText);
     const recaptchaRef: RefObject<ReCAPTCHA> = React.createRef<ReCAPTCHA>();
     const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
@@ -159,7 +175,23 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
                         <p>
                             Your review will be anonymous.
                             We do not track or save any of your information.
-                </p>
+                        </p>
+                        {
+                            reportText === initialReportText 
+                            ? 
+                            <span className={classes.initialReportedText} onClick={_ => {
+                                axios.get(`http://localhost:8000/backend/flag-company/${props.company.id}/`, {
+                                    headers: {
+                                    'Content-Type': 'application/json'
+                                    }
+                                }).then(_ => setReportText('Reported!'))
+                                .catch(_ => setReportText('Reported!'))
+                            }}>
+                                {reportText}
+                            </span> 
+                            :
+                            <span className={classes.reportedText}>{reportText}</span>
+                        }
                     </form>
                 </div>
             </CardContent>
