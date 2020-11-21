@@ -26,10 +26,6 @@ const useStyles = makeStyles({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    formControl: {
-        margin: 20,
-        minWidth: 120,
-    },
     textField: {
         width: '100%',
         margin: 5

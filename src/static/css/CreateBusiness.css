@@ -1,0 +1,13 @@
+.Create-business {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Create-business-form {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

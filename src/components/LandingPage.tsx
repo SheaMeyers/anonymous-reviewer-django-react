@@ -115,7 +115,12 @@ const LandingPage: React.FC = () => {
                   )
               })
           }
-          <Link>Can't find a business?  Add it and leave a review.</Link>
+          <Link href="#" onClick={(event: React.SyntheticEvent) => {
+              event.preventDefault()
+              history.push('create-business');
+          }}>
+              Can't find a business?  Add it and leave a review.
+          </Link>
           </CardContent>
         </Card>
       </div>
