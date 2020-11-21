@@ -77,21 +77,12 @@ class CreateCompanyView(APIView):
     def post(self, request: Request) -> Response:
         company_serializer = CreateCompanySerializers(data=request.data)
         if not company_serializer.is_valid():
-            # In case of error just return 200
-            return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
         company = Company.objects.create(**company_serializer.validated_data)
+        company_data = CompanySerializer(company).data
 
-        review_serializer = CreateReviewSerializers(data=request.data)
-        if not review_serializer.is_valid():
-            # In case of error just return 200
-            return Response(status=status.HTTP_200_OK)
-
-        create_review.delay(str(company.id),
-                            review_serializer.validated_data['rating'],
-                            review_serializer.validated_data['message'])
-
-        return Response(status=status.HTTP_200_OK)
+        return Response(data=company_data, status=status.HTTP_200_OK)
 
 
 class FlagView(APIView):
