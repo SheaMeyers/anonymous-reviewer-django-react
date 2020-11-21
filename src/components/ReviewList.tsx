@@ -37,6 +37,19 @@ const useStyles = makeStyles({
         cursor: 'pointer',
         stroke: 'black',
     },
+    initialReportedText: {
+        color: 'red',
+        cursor: 'pointer',
+        width: '100%',
+        fontSize: 14,
+        textAlign: 'right'
+    },
+    reportedText: {
+        color: 'green',
+        width: '100%',
+        fontSize: 14,
+        textAlign: 'right'
+    }
 });
 
 
@@ -48,8 +61,11 @@ interface ReviewListProps {
 
 const ReviewList = (props: ReviewListProps) => {
 
+    const initialReportText = 'Something inappropriate?  Report it by clicking here.';
+
     const classes = useStyles();
     const [page, setPage] = useState<number>(1);
+    const [reportText, setReportText] = useState<string>(initialReportText);
     const [listItems, setListItems] = useState<any[]>([]);
     const [isFetching, setIsFetching] = useState<boolean>(false);
 
@@ -107,6 +123,22 @@ const ReviewList = (props: ReviewListProps) => {
                                 </div>
                                 <p className="Review-List--Title-Header">Review</p>
                                 <p>{review.message}</p>
+                                {
+                                    reportText === initialReportText 
+                                    ? 
+                                    <span className={classes.initialReportedText} onClick={_ => {
+                                        axios.get(`http://localhost:8000/backend/flag-review/${review.id}/`, {
+                                            headers: {
+                                            'Content-Type': 'application/json'
+                                            }
+                                        }).then(_ => setReportText('Reported!'))
+                                        .catch(_ => setReportText('Reported!'))
+                                    }}>
+                                        {reportText}
+                                    </span> 
+                                    :
+                                    <span className={classes.reportedText}>{reportText}</span>
+                                }
                             </CardContent>
                         </Card>
                     )
