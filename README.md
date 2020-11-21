@@ -20,3 +20,11 @@ npm run build; python manage.py collectstatic --no-input; python manage.py runse
 ```
 python manage.py loaddata backend/fixtures/fixtures.json
 ```
+
+## Run Celery
+
+To run celery ensure Redis is running and run the command
+
+```bash
+celery -A backend worker
+```

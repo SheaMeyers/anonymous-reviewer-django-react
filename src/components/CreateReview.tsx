@@ -91,15 +91,15 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
     // Localhost
     const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
 
-    //   const recaptchaOnChange = (value: any) => {
-    //     axios.post(http://localhost:8000/backend/create-review/, {
-    //       company_id: props.company.id,
-    //       rating: rating,
-    //       message: review
-    //     })
-    //     .then(_ => setFeedbackMessage('Review successfully submitted'))
-    //     .catch(_ => setFeedbackMessage('Review successfully submitted'))
-    //   }
+    const recaptchaOnChange = (value: any) => {
+        axios.post('http://localhost:8000/backend/create-review/', {
+          company_id: props.company.id,
+          rating: rating,
+          message: review
+        })
+        .then(_ => setFeedbackMessage('Review successfully submitted'))
+        .catch(_ => setFeedbackMessage('Review successfully submitted'))
+    }
 
     return (
         <Card className={classes.root}>
@@ -113,13 +113,13 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
                         const elements = event.target.elements;
                         setReview(elements.review.value);
 
-                        //   recaptchaRef.current.execute();
+                        recaptchaRef.current!.execute();
                     }}>
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             size="invisible"
                             sitekey={recaptchaSiteKey}
-                        // onChange={recaptchaOnChange}
+                            onChange={recaptchaOnChange}
                         />
                         <h2 style={{ 'textAlign': 'center' }}>{props.company.name}</h2>
                         <span>{props.company.street_name} {props.company.street_number}</span>
