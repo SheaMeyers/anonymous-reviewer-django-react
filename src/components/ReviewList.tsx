@@ -85,9 +85,9 @@ const ReviewList = (props: ReviewListProps) => {
     return (
         <div className="Review-List">
             {
-                listItems.filter(review => review.rating === props.rating || props.rating === 0).map((review, index) => {
+                listItems.filter(review => review.rating === props.rating || props.rating === 0).map(review => {
                     return (
-                        <Card key={index} className={classes.card}>
+                        <Card key={review.id} className={classes.card}>
                             <CardContent className={classes.cardContent}>
                                 <div className="Review-List--top-portion">
                                     <div>
