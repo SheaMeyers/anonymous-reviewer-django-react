@@ -5,6 +5,7 @@ import CreateBusiness from './CreateBusiness';
 import FrequentlyAskedQuestions from './FrequentlyAskedQuestions';
 import LandingPage from './LandingPage';
 import LeaveReview from './LeaveReview';
+import NotFoundPage from './NotFoundPage';
 
 
 const App: React.FC = () => {
@@ -15,6 +16,7 @@ const App: React.FC = () => {
                 <Route path="/create-business" exact component={CreateBusiness} />
                 <Route path="/leave-review" exact component={LeaveReview} />
                 <Route path="/faq" exact component={FrequentlyAskedQuestions} />
+                <Route component={NotFoundPage}/>
             </Switch>
         </Router>
     )
