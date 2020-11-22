@@ -130,13 +130,12 @@ const LandingPage: React.FC = () => {
           <h2>What we do?</h2>
           <p className="Business-card--text">
             We allow you to stay anonymous and review businesses.
-            Your review will not be public, will not be linked back to you,
-             and will only be seen by the business's owners and managers.
+            Your review will not be linked back to you and we do not do anything to track you.
           </p>
           <h2>Why anonymous?</h2>
           <p className="Business-card--text">
-            Many businesses have trouble getting worthwhile reviews because people do not want their review
-            linked back to them.  This hurts the businesses because they do not receive valuable feedback
+            Many people do not leave reviews because they do not want their review linked back to them.  
+            This hurts the businesses because they do not receive valuable feedback
             and hurts consumers because the businesses in their area do not improve.
           </p>
           <p className="Business-card--text">
