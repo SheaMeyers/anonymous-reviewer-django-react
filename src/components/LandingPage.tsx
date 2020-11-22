@@ -11,6 +11,10 @@ import '../static/css/LandingPage.css';
 
 
 const useStyles = makeStyles({
+  addBusinessLink: {
+    marginTop: 15,
+    fontWeight: 'bold'
+  },
   root: {
     margin: 20,
     overflow: 'visible',
@@ -115,7 +119,7 @@ const LandingPage: React.FC = () => {
                   )
               })
           }
-          <Link href="#" onClick={(event: React.SyntheticEvent) => {
+          <Link className={classes.addBusinessLink} href="#" onClick={(event: React.SyntheticEvent) => {
               event.preventDefault()
               history.push('create-business');
           }}>

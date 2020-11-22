@@ -1,0 +1,21 @@
+.Faq-question {
+    width: 100%;
+    text-align: left !important;
+    margin-bottom: 5px;
+}
+
+.Faq-answer {
+    width: 100%;
+    text-align: left !important;
+    text-indent: 20px;
+    margin-top: 0;
+}
+
+.Faq-info {
+    width: 100%;
+    text-align: left !important;
+}
+
+.Faq--Link {
+    font-weight: bold;
+}
