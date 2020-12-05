@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g@@js783xb#(6hhf^j2tkxi22&&913s!vd973&mkq$ioq&nsmt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',
+                 'anonymous-reviewer-django-react.herokuapp.com', 'anonymousreviewer.com']
 
 
 # Application definition
@@ -145,3 +147,5 @@ CELERY_SCHEMA = os.environ.get('CELERY_SCHEMA', 'redis')
 CELERY_URL = os.environ.get('CELERY_URL', 'localhost')
 CELERY_POST = os.environ.get('CELERY_POST', '6379')
 CELERY_DB = os.environ.get('CELERY_DB', '0')
+
+django_heroku.settings(locals())
