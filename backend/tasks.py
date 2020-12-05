@@ -1,8 +1,8 @@
-from .celery import celery
+# from .celery import celery
 from .models import Company, Review
 
 
-@celery.task
+# @celery.task  # Disabled since this will cost money in heroku
 def create_review(company_id, rating, message):
     company = Company.objects.get(id=company_id)
 
@@ -21,7 +21,6 @@ def create_review(company_id, rating, message):
     company.rating_stats.average_rating = (
                 ((company.rating_stats.average_rating * reviews_count) + rating) / (reviews_count + 1)
     )
-
 
     company.rating_stats.save()
 

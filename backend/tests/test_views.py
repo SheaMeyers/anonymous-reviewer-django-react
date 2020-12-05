@@ -98,7 +98,7 @@ class TestGetCompanyReviewsView(APITestCase):
 
 class TestCreateReview(APITestCase):
 
-    @patch('backend.tasks.create_review.delay')
+    @patch('backend.views.create_review')
     def test_create_reviews_view_calls_task(self, task_mock):
         test_data = {
             'company_id': '00000000-0000-0000-0000-000000000000',
@@ -111,7 +111,7 @@ class TestCreateReview(APITestCase):
         self.assertEqual(response.status_code, 200)
         task_mock.assert_called_once_with('00000000-0000-0000-0000-000000000000', 5, 'Test message')
 
-    @patch('backend.tasks.create_review.delay')
+    @patch('backend.tasks.create_review')
     def test_bad_request_gives_200(self, task_mock):
         test_data = {
             'bad': 'data'
@@ -125,7 +125,7 @@ class TestCreateReview(APITestCase):
 
 class TestCreateCompany(APITestCase):
 
-    @patch('backend.tasks.create_review.delay')
+    @patch('backend.tasks.create_review')
     def test_create_company_creates_company(self, task_mock):
         test_data = {
             'name': 'Test Company',
@@ -140,7 +140,7 @@ class TestCreateCompany(APITestCase):
         self.assertTrue(Company.objects.filter(name='Test Company', street_name='Main St.',
                                                street_number=123, city='Chicago').exists())
 
-    @patch('backend.tasks.create_review.delay')
+    @patch('backend.tasks.create_review')
     def test_bad_request_gives_200(self, task_mock):
         test_data = {
             'bad': 'data'
