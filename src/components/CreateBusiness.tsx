@@ -51,10 +51,10 @@ const CreateBusiness = () => {
     // const recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY || "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
 
     // Prod
-    // const recaptchaSiteKey = "6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb";
+    const recaptchaSiteKey = "6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb";
 
     // Localhost
-    const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
+    // const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
 
     const recaptchaOnChange = (value: any) => {
         axios.post('http://localhost:8000/backend/create-company/', {
