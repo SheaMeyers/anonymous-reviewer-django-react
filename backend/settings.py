@@ -130,6 +130,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+django_heroku.settings(locals())
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -147,5 +148,3 @@ CELERY_SCHEMA = os.environ.get('CELERY_SCHEMA', 'redis')
 CELERY_URL = os.environ.get('CELERY_URL', 'localhost')
 CELERY_POST = os.environ.get('CELERY_POST', '6379')
 CELERY_DB = os.environ.get('CELERY_DB', '0')
-
-django_heroku.settings(locals())
