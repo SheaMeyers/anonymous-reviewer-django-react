@@ -2,6 +2,7 @@ import React, { useState, RefObject } from 'react';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 import { makeStyles } from '@material-ui/core/styles';
+import { domainUrl, googleRecaptchaSiteKey } from '../keys';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -93,18 +94,10 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
     const recaptchaRef: RefObject<ReCAPTCHA> = React.createRef<ReCAPTCHA>();
     const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
-    // localhost -> 6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN
-    // prod -> 6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb
-    // const recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY || "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
-
-    // Prod
-    // const recaptchaSiteKey = "6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb";
-
-    // Localhost
-    const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
+    const recaptchaSiteKey = googleRecaptchaSiteKey;
 
     const recaptchaOnChange = (value: any) => {
-        axios.post('http://localhost:8000/backend/create-review/', {
+        axios.post(`${domainUrl}/backend/create-review/`, {
           company_id: props.company.id,
           rating: rating,
           message: review
@@ -180,7 +173,7 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
                             reportText === initialReportText 
                             ? 
                             <span className={classes.initialReportedText} onClick={_ => {
-                                axios.get(`http://localhost:8000/backend/flag-company/${props.company.id}/`, {
+                                axios.get(`${domainUrl}/backend/flag-company/${props.company.id}/`, {
                                     headers: {
                                     'Content-Type': 'application/json'
                                     }

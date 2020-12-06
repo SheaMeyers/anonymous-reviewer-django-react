@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import '../static/css/LandingPage.css';
+import { domainUrl } from '../keys';
 
 
 const useStyles = makeStyles({
@@ -86,7 +87,7 @@ const LandingPage: React.FC = () => {
   const fuse = new Fuse(searchList, fuseOptions);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/backend/get-companies/')
+    axios.get(`${domainUrl}/backend/get-companies/`)
         .then(response => setSearchList(response.data['companies']))
         .catch(error => console.log('error' + error));
   }, []);

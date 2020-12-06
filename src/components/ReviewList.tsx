@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import StarIcon from '@material-ui/icons/Star';
 import '../static/css/ReviewList.css';
+import { domainUrl } from '../keys';
 
 
 const useStyles = makeStyles({
@@ -76,7 +77,7 @@ const ReviewList = (props: ReviewListProps) => {
     }
 
     const fetchMoreListItems = () => {
-        axios.get(`http://localhost:8000/backend/get-reviews/${props.id}/?page=${page}`, {
+        axios.get(`${domainUrl}/backend/get-reviews/${props.id}/?page=${page}`, {
             headers: {
               'Content-Type': 'application/json'
             }
@@ -127,7 +128,7 @@ const ReviewList = (props: ReviewListProps) => {
                                     reportText === initialReportText 
                                     ? 
                                     <span className={classes.initialReportedText} onClick={_ => {
-                                        axios.get(`http://localhost:8000/backend/flag-review/${review.id}/`, {
+                                        axios.get(`${domainUrl}/backend/flag-review/${review.id}/`, {
                                             headers: {
                                             'Content-Type': 'application/json'
                                             }

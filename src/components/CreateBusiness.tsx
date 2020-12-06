@@ -3,6 +3,7 @@ import axios from 'axios';
 import history from "../history";
 import ReCAPTCHA from "react-google-recaptcha";
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
+import { domainUrl, googleRecaptchaSiteKey } from '../keys';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -46,18 +47,10 @@ const CreateBusiness = () => {
 
     const recaptchaRef: RefObject<ReCAPTCHA> = React.createRef<ReCAPTCHA>();
 
-    // localhost -> 6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN
-    // prod -> 6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb
-    // const recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY || "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
-
-    // Prod
-    const recaptchaSiteKey = "6LdIo6cZAAAAAAgiLRMwiKNYUmSv4oFR7oMXvlkb";
-
-    // Localhost
-    // const recaptchaSiteKey = "6Le6pKcZAAAAAACMEoQ4yHOK_kNyYNiONeFkCqIN";
+    const recaptchaSiteKey = googleRecaptchaSiteKey;
 
     const recaptchaOnChange = (value: any) => {
-        axios.post('http://localhost:8000/backend/create-company/', {
+        axios.post(`${domainUrl}/backend/create-company/`, {
             name: companyName,
             street_name: streetName,
             street_number: streetNumber,

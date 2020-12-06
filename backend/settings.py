@@ -27,7 +27,7 @@ SECRET_KEY = 'g@@js783xb#(6hhf^j2tkxi22&&913s!vd973&mkq$ioq&nsmt'
 DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',
-                 'anonymous-reviewer-django-react.herokuapp.com', 'anonymousreviewer.com']
+                 'anonymous-reviewer.herokuapp.com', 'anonymousreviewer.com']
 
 
 # Application definition
