@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path, re_path
-
-from .views import index
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Have all backend urls nested under backend
     path("backend/", include("backend.backend_urls")),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+    path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml', content_type='text/plain')),
     # Pass any path that doesn't explicity match a 
     #   django endpoint to react router to match
-    re_path(r'^.*', index),
+    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 ]

@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.views.generic import TemplateView
-from django.views.decorators.cache import never_cache, cache_page
+from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage
 
@@ -13,9 +12,6 @@ from rest_framework.views import APIView
 from backend.models import Company, Review
 from backend.serializers import CompanySerializer, ReviewSerializer, CreateReviewSerializers, CreateCompanySerializers
 from backend.tasks import create_review
-
-# Serve Single Page Application
-index = never_cache(TemplateView.as_view(template_name='index.html'))
 
 
 class GetCompaniesView(APIView):
