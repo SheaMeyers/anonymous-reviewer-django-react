@@ -14,9 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
 from django.conf.urls import include
 from django.urls import path, re_path
+from django.views.decorators.cache import cache_page
 from django.views.generic.base import TemplateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,7 +27,7 @@ urlpatterns = [
     path("backend/", include("backend.backend_urls")),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml', content_type='text/plain')),
-    # Pass any path that doesn't explicity match a 
+    # Pass any path that doesn't explicitly match a
     #   django endpoint to react router to match
-    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^.*', cache_page(settings.PAGE_CACHE)(TemplateView.as_view(template_name='index.html'))),
 ]
