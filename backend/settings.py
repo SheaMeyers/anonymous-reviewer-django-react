@@ -26,6 +26,8 @@ SECRET_KEY = 'g@@js783xb#(6hhf^j2tkxi22&&913s!vd973&mkq$ioq&nsmt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+SECURE_SSL_REDIRECT = not DEBUG
+
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',
                  'anonymous-reviewer.herokuapp.com', 'anonymousreviewer.com']
 
