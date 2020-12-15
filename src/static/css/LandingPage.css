@@ -9,6 +9,7 @@
 .Header--div {
     width: 100%;
     display: flex;
+    flex-shrink: 0;
     margin: 20px;
 }
 
