@@ -14,7 +14,7 @@ const useStyles = makeStyles({
         width: 500,
         overflow: 'visible',
         ['@media (max-width: 550px)']: { // eslint-disable-line no-useless-computed-key
-            minWidth: '90%'
+            width: '90%'
         }
     },
     cardContent: {
@@ -31,12 +31,18 @@ const useStyles = makeStyles({
         fontSize: '50px',
         cursor: 'pointer',
         stroke: 'black',
+        ['@media (max-width: 550px)']: { // eslint-disable-line no-useless-computed-key
+            fontSize: '40px',
+        }
     },
     starOutline: {
         color: '#ffffff',
         fontSize: '50px',
         cursor: 'pointer',
         stroke: 'black',
+        ['@media (max-width: 550px)']: { // eslint-disable-line no-useless-computed-key
+            fontSize: '40px',
+        }
     },
     initialReportedText: {
         color: 'red',

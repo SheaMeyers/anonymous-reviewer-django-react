@@ -51,6 +51,9 @@ const useStyles = makeStyles({
         '&:hover': {
             color: '#ffff99',
         },
+        ['@media (max-width: 550px)']: { // eslint-disable-line no-useless-computed-key
+            fontSize: '40px',
+        }
     },
     starOutline: {
         color: '#ffffff',
@@ -60,6 +63,9 @@ const useStyles = makeStyles({
         '&:hover': {
             color: '#ffff99',
         },
+        ['@media (max-width: 550px)']: { // eslint-disable-line no-useless-computed-key
+            fontSize: '40px',
+        }
     },
     miniStar: {
         color: '#ffff00',
