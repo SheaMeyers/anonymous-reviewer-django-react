@@ -50,7 +50,10 @@ const LandingPage: React.FC = () => {
         <CardContent className={classes.cardContent}>
           <h2>Frequently Asked Questions</h2>
           <p className="Faq-question">How do I know my review is anonymous?</p>
-          <p className="Faq-answer">• We do not require any type of sign up to leave a review.  Anyone can leave a review and it will be anonymous.</p>
+          <p className="Faq-answer">
+            • We do not require any type of sign up to leave a review and do not use cookies.  
+              Anyone can leave a review and it will be anonymous.  
+          </p>
           <p className="Faq-question">How do I know these reviews are legimate and not make by bots?</p>
           <p className="Faq-answer">• We use Google Recaptcha to ensure the reviews are left by real people and not by bots.</p>
           <p className="Faq-question">Why can't I find a business?</p>
