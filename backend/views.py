@@ -40,7 +40,7 @@ class GetCompanyReviewsView(APIView):
         try:
             reviews = paginator.page(page)
         except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
+            # If page is out of range (e.g. 9999), deliver empty results.
             reviews = []
 
         reviews_data = ReviewSerializer(reviews, many=True).data
@@ -59,13 +59,9 @@ class CreateReviewsView(APIView):
             return Response(status=status.HTTP_200_OK)
 
         if serializer.validated_data['company_id']:
-            create_review(serializer.validated_data['company_id'],
-                          serializer.validated_data['rating'],
-                          serializer.validated_data['message'])
-            # Disabled since we aren't using celery on heroku
-            # create_review.delay(serializer.validated_data['company_id'],
-            #                     serializer.validated_data['rating'],
-            #                     serializer.validated_data['message'])
+            create_review.delay(serializer.validated_data['company_id'],
+                                serializer.validated_data['rating'],
+                                serializer.validated_data['message'])
 
         return Response(status=status.HTTP_200_OK)
 

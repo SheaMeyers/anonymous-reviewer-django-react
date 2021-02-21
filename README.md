@@ -9,7 +9,7 @@ npm run build
 python manage.py collectstatic --no-input
 ```
 
-## Rebuild and run
+## Rebuild and run in one command
 
 ```bash
 npm run build; python manage.py collectstatic --no-input; python manage.py runserver
@@ -28,8 +28,3 @@ To run celery ensure Redis is running and run the command
 ```bash
 celery -A backend worker
 ```
-
-## When running locally
-
-1. Update the `keys.tsx` variables 
-2. Change `DEBUG=False` to `DEBUG=True`

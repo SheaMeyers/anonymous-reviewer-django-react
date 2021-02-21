@@ -157,23 +157,6 @@ const LandingPage: React.FC = () => {
             <li>
               <p className="Faq-text">Check out our <Link className="Faq-link" onClick={() => history.push('/faq')}> Frequently Asked Questions</Link> </p>
             </li>
-            <li>
-              <p className="Faq-text">Go to our
-                <a
-                    className="Faq-link" 
-                    href="https://www.facebook.com/anonReviewer" 
-                    target="_blank" rel="noopener noreferrer">
-                    Facebook Page
-                </a>
-                or
-                <a
-                    className="Faq-link" 
-                    href="https://twitter.com/AnonRevWebsite" 
-                    target="_blank" rel="noopener noreferrer">
-                    Twitter Page
-                </a>
-              </p>
-            </li>
           </ul>
         </CardContent>
       </Card>

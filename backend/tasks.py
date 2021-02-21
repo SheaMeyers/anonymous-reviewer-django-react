@@ -1,8 +1,8 @@
-# from .celery import celery
+from .celery import celery
 from .models import Company, Review
 
 
-# @celery.task  # Disabled since this will cost money in heroku
+@celery.task
 def create_review(company_id, rating, message):
     company = Company.objects.get(id=company_id)
 
