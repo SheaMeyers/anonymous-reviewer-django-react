@@ -72,4 +72,5 @@ python manage.py runserver
 ```
 
 9. The project should be running and accessible by going to localhost:8000
+
 One example is to search for `My Restaurant` which will have a variety of reviews 
