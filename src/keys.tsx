@@ -1,5 +1,7 @@
 const domainUrl = 'http://localhost:8000'
 
-const googleRecaptchaSiteKey = 'TODO-Create-Recaptcha-Key';
+// TODO Add recaptcha key here
+//   https://developers.google.com/recaptcha/docs/invisible
+const googleRecaptchaSiteKey = '';
 
 export { domainUrl, googleRecaptchaSiteKey };
