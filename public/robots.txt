@@ -2,4 +2,4 @@
 
 User-agent: *
 
-Sitemap: https://www.anonymousreviewer.com/sitemap.xml
+Sitemap: https://www.your-url.com/sitemap.xml
