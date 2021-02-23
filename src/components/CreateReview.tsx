@@ -100,8 +100,6 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
     const recaptchaRef: RefObject<ReCAPTCHA> = React.createRef<ReCAPTCHA>();
     const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
-    const recaptchaSiteKey = googleRecaptchaSiteKey;
-
     const recaptchaOnChange = (value: any) => {
         axios.post(`${domainUrl}/backend/create-review/`, {
           company_id: props.company.id,
@@ -129,7 +127,7 @@ const CreateReview: React.FC<CompanyProps> = (props) => {
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             size="invisible"
-                            sitekey={recaptchaSiteKey}
+                            sitekey={googleRecaptchaSiteKey}
                             onChange={recaptchaOnChange}
                         />
                         <h2 style={{ 'textAlign': 'center' }}>{props.company.name}</h2>

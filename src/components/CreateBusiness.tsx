@@ -47,8 +47,6 @@ const CreateBusiness = () => {
 
     const recaptchaRef: RefObject<ReCAPTCHA> = React.createRef<ReCAPTCHA>();
 
-    const recaptchaSiteKey = googleRecaptchaSiteKey;
-
     const recaptchaOnChange = (value: any) => {
         axios.post(`${domainUrl}/backend/create-company/`, {
             name: companyName,
@@ -88,7 +86,7 @@ const CreateBusiness = () => {
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             size="invisible"
-                            sitekey={recaptchaSiteKey}
+                            sitekey={googleRecaptchaSiteKey}
                             onChange={recaptchaOnChange}
                         />
                         <TextField
