@@ -1,6 +1,6 @@
 # Anonymous Reviewer Django React
 
-This is a project that allows anyone to see and leave reviews for businesses without needed to create an account.  This project is built using Django and ReactJS.  See below for quickstart instructions.
+This project allows anyone to see and leave reviews for businesses without needing to create an account, thereby remaining anonymous.  This project is built using Django and ReactJS.  See below for quickstart instructions.
 
 ## Compiling static resource
 
