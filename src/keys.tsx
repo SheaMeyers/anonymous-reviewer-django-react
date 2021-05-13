@@ -1,4 +1,4 @@
-const domainUrl = 'https://anonymous-reviewer-app.herokuapp.com/'
+const domainUrl = process.env.DOMAIN_URL || 'http://localhost:8000';
 
 // TODO Add recaptcha key here
 //   https://developers.google.com/recaptcha/docs/invisible
