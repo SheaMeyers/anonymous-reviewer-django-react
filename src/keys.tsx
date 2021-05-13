@@ -1,3 +1,8 @@
+console.log('------------------------');
+console.log('process.env');
+console.log(process.env);
+console.log('------------------------');
+
 const domainUrl = process.env.DOMAIN_URL || 'http://localhost:8000';
 
 // TODO Add recaptcha key here
