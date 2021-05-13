@@ -1,8 +1,6 @@
 console.log('------------------------');
 console.log('process.env');
 console.log(process.env);
-console.log('ENV');
-console.log(ENV);
 console.log('------------------------');
 
 const domainUrl = process.env.DOMAIN_URL || 'http://localhost:8000';
