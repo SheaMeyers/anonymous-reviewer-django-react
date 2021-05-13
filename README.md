@@ -2,6 +2,10 @@
 
 This project allows anyone to see and leave reviews for businesses without needing to create an account, thereby remaining anonymous.  This project is built using Django and ReactJS.  See below for quickstart instructions.
 
+## Live Demo
+
+https://anonymous-reviewer-app.herokuapp.com/
+
 ## Compiling static resource
 
 Run the two commands below to update the resources
