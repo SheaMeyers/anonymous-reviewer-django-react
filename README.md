@@ -1,5 +1,7 @@
 # Anonymous Reviewer Django React
 
+This project allows anyone to see and leave reviews for businesses without needing to create an account, thereby remaining anonymous.  This project is built using Django and ReactJS.  See below for quickstart instructions.
+
 ## Compiling static resource
 
 Run the two commands below to update the resources
@@ -74,3 +76,8 @@ python manage.py runserver
 9. The project should be running and accessible by going to localhost:8000
 
 One example is to search for `My Restaurant` which will have a variety of reviews 
+
+
+## Deploying to Heroku
+
+This project also contains the configuration to be deploy to Heroku (https://devcenter.heroku.com/articles/django-app-configuration).  If you created a project in Heroku you should only need to set the git upstream run `git push heroku master` in order for this project to be run on Heroku.  For further instructions please reference Heroku documentation.
