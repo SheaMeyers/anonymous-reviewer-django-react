@@ -38,6 +38,9 @@ celery -A backend worker
 
 ## Quickstart Instructions
 
+Note: This project relies on postgresql being installed on your system
+There should be a database with a name, user, and password of 'anonymous_reviewer_django_react'
+
 1. Create a Google Recaptcha key https://developers.google.com/recaptcha/docs/invisible
 and add it to the `keys.tsx` file (optional but needed for submitting data from website)
 
