@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   }
 });
 
-const LandingPage: React.FC = () => {
+const FrequentlyAskedQuestions: React.FC = () => {
 
   const classes = useStyles();
 
@@ -68,4 +68,4 @@ const LandingPage: React.FC = () => {
   );
 }
 
-export default LandingPage;
+export default FrequentlyAskedQuestions;
